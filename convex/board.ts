@@ -3,16 +3,16 @@ import {v} from "convex/values"
 import {mutation} from "./_generated/server"
 
 const images = [
-    "/placeholdres/1.svg",
-    "/placeholdres/2.svg",
-    "/placeholdres/3.svg",
-    "/placeholdres/4.svg",
-    "/placeholdres/5.svg",
-    "/placeholdres/6.svg",
-    "/placeholdres/7.svg",
-    "/placeholdres/8.svg",
-    "/placeholdres/9.svg",
-    "/placeholdres/10.svg",
+    "/placeholders/1.svg",
+    "/placeholders/2.svg",
+    "/placeholders/3.svg",
+    "/placeholders/4.svg",
+    "/placeholders/5.svg",
+    "/placeholders/6.svg",
+    "/placeholders/7.svg",
+    "/placeholders/8.svg",
+    "/placeholders/9.svg",
+    "/placeholders/10.svg",
 ]
 
 export const create = mutation({
@@ -37,5 +37,18 @@ export const create = mutation({
             imageUrl: randomImages,
         }) ;
         return board;
+    }
+});
+export const remove = mutation({
+    args: {id: v.id("boards")},
+    handler: async (ctx , args) => {
+        const identity = await ctx.auth.getUserIdentity();
+        if(!identity){
+            throw new Error("Unauthorized")
+        }
+
+        //TODO: Later check to delete favorite relation as well
+        await ctx.db.delete(args.id);
+
     }
 })
