@@ -10,12 +10,13 @@ import {
     DropdownMenuSeparator,
 
 } from "@/components/ui/dropdown-menu"
-import { Link2, Trash2 } from "lucide-react";
+import { Link2, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
 import { ConfirmModel } from "./confirm-model";
 import { Button } from "./ui/button";
+import { useRenameModel } from "@/store/use-rename";
 interface ActionsProps {
     children: React.ReactNode;
     side?: DropdownMenuContentProps["side"]
@@ -31,6 +32,7 @@ export const Actions = ({
     id,
     title
 }: ActionsProps) => {
+    const {onOpen} = useRenameModel();
     const { mutate, pending } = useApiMutation(api.board.remove)
     const onDelete = () => {
         mutate({ id })
@@ -60,6 +62,12 @@ export const Actions = ({
                         className=" h-4 w-4 mr-2"
                     />
                     Copy board link
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={()=> onOpen(id, title)} className=" p-3 cursor-pointer">
+                    <Pencil
+                        className=" h-4 w-4 mr-2"
+                    />
+                    Rename
                 </DropdownMenuItem>
                 <ConfirmModel
                     header="Delete board?"
