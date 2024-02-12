@@ -28,7 +28,7 @@ Features:
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/AntonioErdeljac/next14-miro-clone.git
+git https://github.com/reddevilprasun/whiteboard.git
 ```
 
 ### Install packages
