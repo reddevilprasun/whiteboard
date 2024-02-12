@@ -277,7 +277,7 @@ export const Canvas = ({
             >
                 <g
                     style={{
-                        transform: `translate(${camera.x}, ${camera.y})`
+                        transform: `translate(${camera.x}px, ${camera.y}px)`
                     }}
                 >
                     {layerIds.map((layerId) => (
